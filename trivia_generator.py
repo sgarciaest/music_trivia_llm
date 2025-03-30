@@ -46,6 +46,7 @@ Your task is to create a single multiple-choice question (with 4 answer options)
 - Make distractors challenging — avoid random or obviously wrong answers. Use your own music knowledge to make them close but incorrect (e.g., artists from the same genre/era, songs with similar names, albums from similar years).
 - Always generate exactly 4 options and specify the correct answer.
 - Do NOT include any explanation or commentary.
+- When showing release dates options, don't show options with a full date (e.g. 2022-03-14). Show only years.
 
 **Song Information**:
 - Title: "{title}"
