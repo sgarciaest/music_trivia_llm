@@ -10,7 +10,7 @@ from spotify_utils import (
 )
 import random
 from cohere_utils import get_trivia_question_from_prompt
-from trivia_generator import generate_trivia_prompt
+from trivia_generator import generate_trivia_prompt, get_album_and_artist_strengths
 
 st.set_page_config(page_title="Spotify Seamless Auth", layout="centered")
 st.title("🎧 Spotify Login")
@@ -50,21 +50,23 @@ if is_token_cached():
     if len(tracks) < 10:
         st.warning("Not enough saved songs to generate trivia. Please save more songs in your Spotify.")
     else:
+        # Compute strong albums/artists once
+        strong_albums, strong_artists = get_album_and_artist_strengths(tracks)
+
         if st.button("🎲 Generate a Trivia Question"):
             with st.spinner("Thinking... 🤔"):
                 main_track = random.choice(tracks)
-                distractors = random.sample(
-                    [t for t in tracks if t != main_track], 
-                    k=5
-                )
 
-                prompt = generate_trivia_prompt(main_track)
+                # Generate prompt with personalization logic
+                prompt = generate_trivia_prompt(main_track, strong_albums, strong_artists)
+
                 try:
                     trivia = get_trivia_question_from_prompt(prompt)
                     st.session_state.current_trivia = trivia
                 except Exception as e:
                     st.error("Failed to generate trivia.")
                     st.exception(e)
+
 
     # Show trivia question if available
     if "current_trivia" in st.session_state:
