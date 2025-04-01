@@ -1,0 +1,4 @@
+*.log
+.env
+.spotify_cache
+**/__pycache__/
