@@ -30,9 +30,18 @@ with st.sidebar:
         profile = sp.current_user()
 
         st.success("Logged in!")
+
         if profile.get("images"):
-            st.write(f"**{profile['display_name']}**")
-            st.image(profile["images"][0]["url"], width=50)
+            name = profile['display_name']
+            image_url = profile["images"][0]["url"]
+
+            st.markdown(f"""
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="{image_url}" width="35" style="border-radius: 50%; margin-top: 2px;" />
+                <strong>{name}</strong>
+            </div>
+            <div style="margin-bottom: 20px;"></div>
+            """, unsafe_allow_html=True)
 
         if st.button("Logout"):
             os.remove(".spotify_cache")
