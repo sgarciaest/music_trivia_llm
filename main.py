@@ -15,7 +15,9 @@ from spotify_utils import (
 from cohere_utils import get_trivia_question_from_prompt
 from trivia_generator import generate_trivia_prompt, get_album_and_artist_strengths
 
-st.set_page_config(page_title="Music Trivia", layout="wide")
+# st.set_page_config(page_title="Music Trivia", layout="wide", page_icon="📀")
+st.set_page_config(page_title="Music Trivia", layout="wide", page_icon=":material/lyrics:")
+
 st.title("🎧 Music Trivia")
 
 # --- Sidebar: User Info and Auth ---
@@ -28,9 +30,9 @@ with st.sidebar:
         profile = sp.current_user()
 
         st.success("Logged in!")
-        st.write(f"**{profile['display_name']}**")
         if profile.get("images"):
-            st.image(profile["images"][0]["url"], width=100)
+            st.write(f"**{profile['display_name']}**")
+            st.image(profile["images"][0]["url"], width=50)
 
         if st.button("Logout"):
             os.remove(".spotify_cache")
@@ -95,13 +97,12 @@ if is_token_cached() and sp:
                 st.write(" ".join(history))
 
     # --- Trivia Logic ---
-    st.subheader("🧠 Music Trivia")
-
+    st.subheader("Test your music knowledge!")
     strong_albums, strong_artists = get_album_and_artist_strengths(tracks)
 
     if "current_trivia" not in st.session_state and "trivia_result" not in st.session_state:
         if st.button("🎲 Generate a Trivia Question"):
-            with st.spinner("Thinking... 🤔"):
+            with st.spinner("Generating... 🤔"):
                 main_track = random.choice(tracks)
                 prompt = generate_trivia_prompt(main_track, strong_albums, strong_artists)
                 try:
