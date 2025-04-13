@@ -16,7 +16,9 @@ This interactive prototype generates personalized music trivia questions based o
 
 ## 🛠️ Setup Instructions
 
-You can replicate on your machine using the following steps or check the prototyoe [here](https://music-trivia-llm.streamlit.app/).
+You can replicate on your machine using the following steps.
+
+> The prototype could also be checked [here](https://music-trivia-llm.streamlit.app/), but a request to get Extended Quota Mode for this Spotify API app. Until then, the prototype can only be checked by installing it in your own environment with your own API keys, or by asking me to grant access through my Spotify for Developers Dashboard in development mode for now.
 
 ### 1. Clone the repository
 
