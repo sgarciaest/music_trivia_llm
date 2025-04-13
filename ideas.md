@@ -1,3 +1,5 @@
+# Initial Ideas for the project
+
 Default type of questions:
 - When was {title} by{artist} in the {album} released?
 - Which song is from the album “{album}”?
