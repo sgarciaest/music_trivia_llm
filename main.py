@@ -44,7 +44,6 @@ with st.sidebar:
             """, unsafe_allow_html=True)
 
         if st.button("Logout"):
-            os.remove(".spotify_cache")
             st.session_state.clear()
             st.rerun()
     else:

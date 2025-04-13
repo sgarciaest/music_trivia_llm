@@ -2,6 +2,7 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
+import streamlit as st
 
 load_dotenv()
 
@@ -13,12 +14,17 @@ def get_spotify_oauth():
         client_secret=os.getenv("SPOTIFY_CLIENT_SECRET"),
         redirect_uri=os.getenv("SPOTIFY_REDIRECT_URI"),
         scope=SCOPE,
-        cache_path=".spotify_cache"  # local token storage
+        cache_handler=None  # disables persistent file-based cache
     )
 
 def get_token_from_code(code):
     sp_oauth = get_spotify_oauth()
-    return sp_oauth.get_access_token(code, as_dict=False)
+    token_info = sp_oauth.get_access_token(code, as_dict=True)
+    if token_info:
+        st.session_state["spotify_token"] = token_info
+        return token_info["access_token"]
+    return None
+
 
 def get_auth_url():
     sp_oauth = get_spotify_oauth()
@@ -28,15 +34,14 @@ def get_spotify_client_from_token(token):
     return spotipy.Spotify(auth=token)
 
 def is_token_cached():
-    sp_oauth = get_spotify_oauth()
-    return sp_oauth.get_cached_token() is not None
+    return "spotify_token" in st.session_state
 
 def get_cached_spotify_client():
-    sp_oauth = get_spotify_oauth()
-    token_info = sp_oauth.get_cached_token()
+    token_info = st.session_state.get("spotify_token")
     if token_info:
-        return spotipy.Spotify(auth=token_info['access_token'])
+        return spotipy.Spotify(auth=token_info["access_token"])
     return None
+
 
 def get_user_saved_tracks(sp, limit=50, show_progress=False):
     tracks = []
