@@ -76,16 +76,16 @@ if is_token_cached() and sp:
         # First and last songs
         added_dates = sorted([t['release_date'] for t in tracks if t['release_date']])
         if added_dates:
-            st.write(f"- **Oldest song**: {added_dates[0]}")
-            st.write(f"- **Newest song**: {added_dates[-1]}")
+            st.write(f"- **Oldest released song**: {added_dates[0]}")
+            st.write(f"- **Newest released song**: {added_dates[-1]}")
 
-        # Decade analysis
-        years = [int(t['release_date'][:4]) for t in tracks if t['release_date'][:4].isdigit()]
-        decades = [f"{(y // 10) * 10}s" for y in years]
-        most_common_decades = Counter(decades).most_common(3)
-        st.write("**Top decades:**")
-        for d, count in most_common_decades:
-            st.write(f"- {d} ({count} songs)")
+        # # Decade analysis
+        # years = [int(t['release_date'][:4]) for t in tracks if t['release_date'][:4].isdigit()]
+        # decades = [f"{(y // 10) * 10}s" for y in years]
+        # most_common_decades = Counter(decades).most_common(3)
+        # st.write("**Top decades:**")
+        # for d, count in most_common_decades:
+        #     st.write(f"- {d} ({count} songs)")
 
         # Trivia Stats
         st.divider()
