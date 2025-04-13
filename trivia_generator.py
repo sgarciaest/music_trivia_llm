@@ -23,22 +23,17 @@ Your task is to create a single multiple-choice question (with 4 answer options)
 
 **Guidelines**:
 - The question must be factually correct and based on real knowledge of the song, artist, or album.
-- Choose one of these types **intelligently**:
-    - When was this song by this artist released?
-    - What is the album name of the song by this artist?
-    - Who is the artist of the song?
-    - Which of these songs is by this artist?
-    - Which song is from this album?
+- In general the question should be focused on the song info provided (title, artist, album, release date). If specified below, you can (or not, up to you) generate specific questions about an album or an artist forgetting the song, and using your music knowledge to do it.
 
 """
 
     if album_ok:
-        prompt += "- You ARE allowed to ask about the album (e.g., album release year, songs on the album, which song doesn't belong).\n"
+        prompt += "- You ARE allowed to ask about the album. The user probably has sufficient knowledge on the album based on the number of saved songs of the album in his library. \n"
     else:
         prompt += "- Do NOT ask about the album — the user may not know it well enough.\n"
 
     if artist_ok:
-        prompt += "- You ARE allowed to ask about the artist (e.g., which songs are by them).\n"
+        prompt += "- You ARE allowed to ask about the artist.  The user probably has sufficient knowledge on the artist based on the number of saved songs of the artist in his library. \n"
     else:
         prompt += "- Do NOT ask questions that require deep artist knowledge.\n"
 
@@ -47,6 +42,12 @@ Your task is to create a single multiple-choice question (with 4 answer options)
 - Always generate exactly 4 options and specify the correct answer.
 - Do NOT include any explanation or commentary.
 - When showing release dates options, don't show options with a full date (e.g. 2022-03-14). Show only years.
+- Do NOT use negation (e.g. "was NOT released") to form questions. Avoid reverse logic or trick-question phrasing.
+- Do not create questions that refer to songs absent from the provided set of albums. For instance, avoid questions such as: “Which of the following albums by (artist) does not include the song (title)?”
+- If a question focuses on a specific song, include all relevant details from the available metadata except the one being asked about. For example:
+    - If the question is about the release year, also mention the song's artist and album name.
+    - If asking which album a song appears on, also provide the artist name and release year.
+- The main sentence of each question must explicitly reference at least one data point from the provided song metadata—either the song title, album name, or artist name. You may use external music knowledge to construct context or plausible answer choices, but the core focus of the question must remain tied to actual items present in the provided information.
 
 **Song Information**:
 - Title: "{title}"
