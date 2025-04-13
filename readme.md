@@ -16,6 +16,8 @@ This interactive prototype generates personalized music trivia questions based o
 
 ## 🛠️ Setup Instructions
 
+You can replicate on your machine using the following steps or check the prototyoe [here](https://music-trivia-llm.streamlit.app/).
+
 ### 1. Clone the repository
 
 ```bash
@@ -38,7 +40,7 @@ pip install -r requirements.txt
 
 
 
-## 🔐 Environment Variables
+### 4. Environment Variables
 
 You’ll need a `.env` file in the root of the project with the following variables:
 
@@ -52,14 +54,14 @@ SPOTIFY_REDIRECT_URI=http://localhost:8501
 COHERE_API_KEY=your_cohere_api_key
 ```
 
-### ⚠️ Important
+> ⚠️ Important
+>
+> - Make sure to [register your app on Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) and add `http://localhost:8501` as a **redirect URI**.
+> - Get a free [Cohere API key](https://dashboard.cohere.com/api-keys) to access the LLM used for trivia generation.
 
-- Make sure to [register your app on Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) and add `http://localhost:8501` as a **redirect URI**.
-- Get a free [Cohere API key](https://dashboard.cohere.com/api-keys) to access the LLM used for trivia generation.
 
 
-
-## ▶️ Running the App
+### 5. Running the App
 
 Launch the Streamlit app with:
 
