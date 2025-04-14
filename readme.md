@@ -2,7 +2,7 @@
 
 This interactive prototype generates personalized music trivia questions based on your saved tracks in Spotify. Using an LLM (Cohere), the app crafts challenging questions from song metadata like title, artist, album, and release date — without needing a predefined question database.
 
-
+> The purpose of this project was to explore prototyping capabilities using Streamlit, while experimenting with the integration of LLM APIs like Cohere. The goal was to embed natural language processing into the logic of a real application, showing how LLMs can enhance protyping processes and user experiences — in this case, by generating personalized music trivia based on Spotify data.
 
 ## 🚀 Features
 
